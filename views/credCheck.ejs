@@ -1,0 +1,25 @@
+<%- include('partials/head.ejs') %>
+    <div class="row" style="height : 100vh; width : 100vw; margin : 0; padding : 0;">
+        <div class="col-md-4"></div>
+        <div class="col-md-4 text-center" style = "margin: auto; background-color: #99C4c8; height: 70vh; border-radius: 30px; padding: 50px;">
+            <p class="h1"><b><% if(type){ %>Login<% }else{ %>Sign-Up<%}%></b></p>
+
+
+            <form class="form" style="padding-top: 20px;" id="mainForm" method="POST">
+                <%if(!type){%>
+                    <input type="text" class="form-control m-2" name="name" placeholder="Enter your name" id="InputName" required>
+                <%}%>
+                <input type="text" class="form-control m-2" name="email" placeholder="Enter your email, ex: abc@xyz.com" id="InputEmail" required>
+                <input type="text" class="form-control m-2" name="password" placeholder="Enter your password" id="InputPassword" required>
+                <%if(!type){%>
+                    <input type="text" class="form-control m-2" name="confirmPassword" placeholder="Re-enter your password" id="InputRepeatPassword" required>
+                <%}%>
+                <b><input type="submit" class="form-control mt-5 m-2" style="border: 0;color: #E5cb9f; background-color: #549cb6;" onclick="change()" value="<% if(type){ %>Login<% }else{ %>Sign-Up<%}%>"></b>
+                <p><% if(type){ %>Don't have an account? Make one <a href="/sign-up">here</a><% }else{ %>Already have an account? Login <a href="/login">here</a><%}%></p>
+            </form>
+
+
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+<%- include('partials/foot.ejs') %>

@@ -1,0 +1,94 @@
+<%- include('partials/head.ejs') %>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <span class="navbar-brand"><b>JournalOn</b></span>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Your Journal</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/">Your Calender</a>
+          </li>
+        </ul>
+      </div>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <button class="btn btn-success me-3" onclick="location.href='/make'">+ Create Journal</button>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-warning" onclick="location.href='/logout'">LogOut</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+</nav>
+<style>
+    .journal {
+      position: absolute;
+      z-index: 9;
+      width: 30vw;
+    }
+    
+    #mydivheader {
+      z-index: 10;
+    }
+</style>
+
+<% dataSet.journal.forEach(function (jour){ %>
+    <div class="alert alert-<%= jour.color %> journal" id="<%= jour.id %>" role="alert">
+        <div id="#mydivheader">
+            <h4 class="alert-heading text-center"><%= jour.title %></h4>
+            <hr>
+            <p><%= jour.description %></p>
+            <hr>
+        </div>
+        <button class="btn btn-<%= jour.color %> form-control" onclick="location.href='/write/<%= jour.id %>'">Open</button>
+      </div>
+<%})%>
+
+  <script>
+      <% dataSet.journal.forEach(function (jour){ %>
+        dragElement(document.getElementById("<%= jour.id %>"));
+    <%})%>
+    function dragElement(elmnt) {
+      elmnt.style.top = (elmnt.offsetTop - Math.floor(Math.random() * -300 )) + "px";
+      elmnt.style.left = (elmnt.offsetLeft - Math.floor(Math.random()*-500)) + "px";
+      var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+      if (document.getElementById(elmnt.id + "header")) {
+        document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+      } else {
+        elmnt.onmousedown = dragMouseDown;
+      }
+    
+      function dragMouseDown(e) {
+        e = e || window.event;
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = closeDragElement;
+        document.onmousemove = elementDrag;
+      }
+    
+      function elementDrag(e) {
+        e = e || window.event;
+        e.preventDefault();
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+      }
+    
+      function closeDragElement() {
+        document.onmouseup = null;
+        document.onmousemove = null;
+      }
+    }
+    </script>
+<%- include('partials/foot.ejs') %>

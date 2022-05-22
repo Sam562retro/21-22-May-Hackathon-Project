@@ -1,0 +1,62 @@
+<%- include('partials/head.ejs') %>
+<style>
+    body {
+        background-color: #fffbe7;
+        overflow-y: hidden !important;
+        overflow-x: hidden !important;
+    }
+
+    *:focus {
+        outline: none !important;
+    }
+
+    .navbar {
+        min-width: 100vw;
+        min-height: 3vh;
+        background-color: #99cfc8;
+        position: fixed;
+        z-index: 10;
+        padding-left: 2vw;
+        margin-right: 2vh;
+    }
+
+    .center {
+        width: 10%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .fontEdit {
+        margin-left: 1vw;
+    }
+
+    textarea {
+        background-color: #fffbe7!important;
+    }
+</style>
+    <form method="POST" class="form">
+        <div class="navbar sticky-top">
+            <input type="submit" class="btn btn-success " value="Save">
+        </div>
+        <div class="row">
+            <div class="col-md-3 p-5" style="background-color: #549cb6; margin-top: 7vh;">
+                <p class="h1"><b>Edit Details</b></p>
+                <input type="text" class="mt-2 form-control" name="title" placeholder="Title" value="<%= dataSet.title %>" required>
+                <input type="text" class="mt-2 form-control" name="description" placeholder="Description" value="<%= dataSet.description %>" required>
+                <select name="color" class="mt-2 form-control">
+                    <option disabled>Select the color you want your journal to have</option>
+                    <option value="dark"    <% if(dataSet.color == "dark"){ %> selected <%}%> >Black</option>
+                    <option value="light"   <% if(dataSet.color == "light"){ %> selected <%}%>>White</option>
+                    <option value="primary" <% if(dataSet.color == "primary"){ %> selected <%}%>>Blue</option>
+                    <option value="success" <% if(dataSet.color == "success"){ %> selected <%}%>>Green</option>
+                    <option value="warning" <% if(dataSet.color == "warning"){ %> selected <%}%>>Yellow</option>
+                    <option value="danger"  <% if(dataSet.color == "danger"){ %> selected <%}%>>Red</option>
+                </select>
+            </div>
+            <div class="col-md-9" style="margin-top: 7vh; ">
+                <pre><textarea class="form-control " name="text" style="margin-top: 2vh; height: 93vh; margin-bottom: 1vh;" id="exampleFormControlTextarea1 " rows="5 "><%= dataSet.text %></textarea></pre>
+            </div>
+        </div>
+    </form>
+
+    <%- include('partials/foot.ejs') %>

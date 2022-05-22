@@ -1,0 +1,21 @@
+<%- include('partials/head.ejs') %>
+<div class="text-center" style = "margin: auto; background-color: #99C4c8; height: 100vh; padding: 50px;">
+    <p class="h1"><b>Create A New Journal</b></p>
+
+
+    <form class="form" style="padding-top: 20px;" method="POST">
+        <input type="text" class="form-control m-2" name="title" placeholder="Enter the title you would like to have on your new journal" required>
+        <input type="text" class="form-control m-2" name="description" placeholder="Enter a short description for your new journal" required>
+        <select name="color" class="m-2 form-control">
+            <option selected disabled>Select the color you want your journal to have</option>
+            <option value="dark">Black</option>
+            <option value="light">White</option>
+            <option value="primary">Blue</option>
+            <option value="success">Green</option>
+            <option value="warning">Yellow</option>
+            <option value="danger">Red</option>
+        </select>
+        <b><input type="submit" class="form-control mt-5 m-2" style="border: 0;color: #E5cb9f; background-color: #549cb6;" value="Make"></b>
+    </form>
+</div>
+<%- include('partials/foot.ejs') %>
